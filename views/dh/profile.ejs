@@ -1,0 +1,47 @@
+<%- include('./partials/header') %>
+
+<div class="row">
+    <%- include('./partials/sidebar') %>
+    <div class="col-md-9">
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Department Head Profile</h2>
+                        </div>
+
+                            <div class="text-center mb-4">
+                                <img src="<%= dh.image || '/images/default-avatar.png' %>" 
+                                     class="rounded-circle" 
+                                     style="height: 200px; width: 200px; object-fit: cover;">
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><strong>Name:</strong> <%= dh.name %></p>
+                                    <p><strong>Email:</strong> <%= dh.email %></p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Department:</strong> <%= dh.department %></p>
+                                    <p><strong>Phone:</strong> <%= dh.phoneNumber || 'Not provided' %></p>
+                                </div>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <a href="/dh/profile/edit" class="btn btn-primary">
+                                    <i class="fas fa-edit"></i> Edit Profile
+                                </a>
+                                <a href="/dh/dashboard" class="btn btn-secondary ml-2">
+                                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer') %> 

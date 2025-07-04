@@ -1,0 +1,78 @@
+<%- include('./partials/header') %>
+
+<div class="row">
+    <%- include('./partials/sidebar') %>
+    <div class="col-md-9">
+        <div class="row">
+            <div class="col-md-12 mb-4">
+                <h2>Welcome, <%= user.name %></h2>
+            </div>
+        </div>
+
+<div class="row">
+    <div class="col-md-3 mb-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Pending Leaves</h5>
+                <h2 class="card-text"><%= pendingLeaves %></h2>
+                <a href="/coo/leave/pending" class="btn btn-light">View Details</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Total Employees</h5>
+                <h2 class="card-text"><%= totalEmployees %></h2>
+                <a href="/coo/employees" class="btn btn-light">View Details</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5 class="card-title">Approved Leaves</h5>
+                <h2 class="card-text"><%= approvedLeaves %></h2>
+                <a href="/coo/leave/history" class="btn btn-light">View Details</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="card bg-danger text-white">
+            <div class="card-body">
+                <h5 class="card-title">Denied Leaves</h5>
+                <h2 class="card-text"><%= deniedLeaves %></h2>
+                <a href="/coo/leave/history" class="btn btn-light">View Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Quick Actions</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    <a href="/coo/leave/pending" class="list-group-item list-group-item-action">
+                        <i class="bi bi-clock"></i> Review Pending Leaves
+                    </a>
+                    <a href="/coo/employees" class="list-group-item list-group-item-action">
+                        <i class="bi bi-people"></i> View Employee List
+                    </a>
+                    <a href="/coo/department-heads" class="list-group-item list-group-item-action">
+                        <i class="bi bi-person-badge"></i> View Department Heads
+                    </a>
+                    <a href="/coo/profile" class="list-group-item list-group-item-action">
+                        <i class="bi bi-person"></i> Update Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer') %> 

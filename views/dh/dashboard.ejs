@@ -1,0 +1,105 @@
+<%- include('./partials/header') %>
+
+<div class="row">
+    <%- include('./partials/sidebar') %>
+    <div class="col-md-9">
+        <!-- Dashboard content -->
+        <div class="container mt-4">
+            <div class="row">
+                <!-- Welcome Section -->
+                <div class="col-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h2>Welcome, <%= dh.name %></h2>
+                            <p class="lead">Department Head Dashboard</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Statistics Cards -->
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Pending Leaves</h5>
+                            <h2 class="card-text"><%= pendingLeaves %></h2>
+                            <a href="/dh/leave/pending" class="text-white">View Details <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Approved Leaves</h5>
+                            <h2 class="card-text"><%= approvedLeaves %></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-danger text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Rejected Leaves</h5>
+                            <h2 class="card-text"><%= rejectedLeaves %></h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Leave Applications -->
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Recent Leave Applications</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Employee</th>
+                                            <th>Subject</th>
+                                            <th>Leave Type</th>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% if (recentLeaves && recentLeaves.length > 0) { %>
+                                            <% recentLeaves.forEach(function(leave) { %>
+                                                <tr>
+                                                    <td><%= leave.employeeLeave.name %></td>
+                                                    <td><%= leave.subject %></td>
+                                                    <td><%= leave.leaveType %></td>
+                                                    <td><%= moment(leave.from).format('DD/MM/YYYY') %></td>
+                                                    <td><%= moment(leave.to).format('DD/MM/YYYY') %></td>
+                                                    <td>
+                                                        <span class="badge bg-<%= leave.status === 'approved' ? 'success' : 
+                                                                           leave.status === 'denied' ? 'danger' : 
+                                                                           'secondary' %>">
+                                                            <%= leave.status %>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <a href="/dh/leave/<%= leave._id %>" class="btn btn-sm btn-info">
+                                                            <i class="fas fa-eye"></i> View
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <% }); %>
+                                        <% } else { %>
+                                            <tr>
+                                                <td colspan="7" class="text-center">No recent leave applications</td>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer') %> 

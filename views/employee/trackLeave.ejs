@@ -1,0 +1,61 @@
+<%- include('./partials/header') %>
+
+<div class="row">
+    <%- include('./partials/sidebar') %>
+    <div class="col-md-9">
+        <!-- Track Leave content -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Track Leave</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Leave Type</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Days</th>
+                                <th>Status</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (employee.leaves && employee.leaves.length > 0) { %>
+                                <% employee.leaves.forEach(function(leave) { %>
+                                    <tr>
+                                        <td><%= leave.subject %></td>
+                                        <td><%= leave.leaveType %></td>
+                                        <td><%= moment(leave.from).format('DD/MM/YYYY') %></td>
+                                        <td><%= moment(leave.to).format('DD/MM/YYYY') %></td>
+                                        <td><%= leave.days %></td>
+                                        <td>
+                                            <span class="badge bg-<%= leave.status === 'approved' ? 'success' : 
+                                                                               leave.status === 'denied' ? 'danger' : 
+                                                                               'secondary' %>">
+                                                <%= leave.status %>
+                                            </span>
+                                        </td>
+                                        <td><%= leave.reason %></td>
+                                    </tr>
+                                <% }); %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="6" class="text-center">No leave applications found</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="/employee/leave/apply" class="btn btn-primary">Apply for Leave</a>
+                    <a href="/employee/dashboard" class="btn btn-secondary ml-2">Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer') %> 

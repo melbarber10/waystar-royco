@@ -1,0 +1,47 @@
+<%- include('./partials/header') %>
+
+<div class="row">
+    <%- include('./partials/sidebar') %>
+    <div class="col-md-9">
+        <!-- Edit Profile content -->
+        <div class="card">
+            <div class="card-header">
+                <h3>Edit Profile</h3>
+            </div>    
+                <form action="/employee/profile" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="name" value="<%= employee.name %>" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" value="<%= employee.email %>" disabled>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" class="form-control" name="phoneNumber" value="<%= employee.phoneNumber || '' %>">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Profile Picture</label>
+                        <input type="file" class="form-control-file" name="image" accept="image/*">
+                        <% if (employee.image) { %>
+                            <div class="mt-2">
+                                <img src="<%= employee.image %>" alt="Current profile picture" class="img-thumbnail" style="max-width: 200px;">
+                            </div>
+                        <% } %>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                        <a href="/employee/profile" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer') %>

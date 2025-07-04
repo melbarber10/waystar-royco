@@ -1,0 +1,19 @@
+<div class="col-md-3">
+    <div class="list-group">
+        <a href="/employee/dashboard" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'dashboard') ? 'active' : '' %>">
+            <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+        <a href="/employee/leave/apply" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'apply') ? 'active' : '' %>">
+            <i class="bi bi-calendar-plus"></i> Apply Leave
+        </a>
+        <a href="/employee/leave/track" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'track') ? 'active' : '' %>">
+            <i class="bi bi-clock-history"></i> Track Leave
+        </a>
+        <a href="/employee/profile" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'profile') ? 'active' : '' %>">
+            <i class="bi bi-person-circle"></i> Profile
+        </a>
+        <a href="/auth/logout" class="list-group-item list-group-item-action text-danger">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+    </div>
+</div> 

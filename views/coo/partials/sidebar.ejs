@@ -1,0 +1,22 @@
+<div class="col-md-3">
+    <div class="list-group">
+        <a href="/coo/leave/pending" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'pending') ? 'active' : '' %>">
+            <i class="bi bi-clock"></i> Pending Leaves
+        </a>
+        <a href="/coo/leave/history" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'history') ? 'active' : '' %>">
+            <i class="bi bi-clock-history"></i> All Leave History
+        </a>
+        <a href="/coo/employees" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'employees') ? 'active' : '' %>">
+            <i class="bi bi-people"></i> Employees
+        </a>
+        <a href="/coo/department-heads" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'department-heads') ? 'active' : '' %>">
+            <i class="bi bi-person-badge"></i> Department Heads
+        </a>
+        <a href="/coo/profile" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'profile') ? 'active' : '' %>">
+            <i class="bi bi-person-circle"></i> Profile
+        </a>
+        <a href="/auth/logout" class="list-group-item list-group-item-action text-danger">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+    </div>
+</div> 

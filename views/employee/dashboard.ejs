@@ -1,0 +1,117 @@
+<%- include('./partials/header') %>
+
+<div class="row">
+    <%- include('./partials/sidebar') %>
+    <div class="col-md-9">
+        <div class="row">
+            <!-- Welcome Section -->
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Welcome, <%= employee.name %></h2>
+                        <p class="text-muted">Employee Dashboard</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="col-md-3 mb-4">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Pending Leaves</h5>
+                        <h2 class="card-text"><%= pendingLeaves %></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Approved Leaves</h5>
+                        <h2 class="card-text"><%= approvedLeaves %></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card bg-danger text-white">
+                    <div class="card-body">
+                        <h5 class="card-title">Denied Leaves</h5>
+                        <h2 class="card-text"><%= deniedLeaves %></h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Leaves -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Recent Leave Applications</h5>
+                    </div>
+                    <div class="card-body">
+                        <% if (recentLeaves.length > 0) { %>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Subject</th>
+                                            <th>Type</th>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% recentLeaves.forEach(leave => { %>
+                                            <tr>
+                                                <td><%= leave.subject %></td>
+                                                <td><%= leave.leaveType %></td>
+                                                <td><%= moment(leave.from).format('MMM DD, YYYY') %></td>
+                                                <td><%= moment(leave.to).format('MMM DD, YYYY') %></td>
+                                                <td>
+                                                    <span class="badge bg-<%= leave.status === 'approved' ? 'success' : leave.status === 'denied' ? 'danger' : 'warning' %>">
+                                                        <%= leave.status %>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <% } else { %>
+                            <p class="text-muted">No leave applications yet.</p>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="col-12 mt-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Quick Actions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <a href="/employee/leave/apply" class="btn btn-primary btn-block">
+                                    Apply for Leave
+                                </a>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <a href="/employee/leave/track" class="btn btn-info btn-block">
+                                    Track Leaves
+                                </a>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <a href="/employee/profile" class="btn btn-secondary btn-block">
+                                    View Profile
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer') %> 

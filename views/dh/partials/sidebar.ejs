@@ -1,0 +1,19 @@
+<div class="col-md-3">
+    <div class="list-group">
+        <a href="/dh/dashboard" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'dashboard') ? 'active' : '' %>">
+            <i class="bi bi-speedometer2"></i> Dashboard
+        </a>
+        <a href="/dh/leave/pending" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'pending') ? 'active' : '' %>">
+            <i class="bi bi-clock"></i> Pending Leaves
+        </a>
+        <a href="/dh/leave/history" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'history') ? 'active' : '' %>">
+            <i class="bi bi-clock-history"></i> Leave History
+        </a>
+        <a href="/dh/profile" class="list-group-item list-group-item-action <%= (typeof active !== 'undefined' && active === 'profile') ? 'active' : '' %>">
+            <i class="bi bi-person-circle"></i> Profile
+        </a>
+        <a href="/auth/logout" class="list-group-item list-group-item-action text-danger">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+    </div>
+</div> 

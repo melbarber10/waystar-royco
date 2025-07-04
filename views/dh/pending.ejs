@@ -1,0 +1,68 @@
+<%- include('./partials/header') %>
+
+<div class="container-fluid">
+    <div class="row">
+        <%- include('./partials/sidebar') %>
+        <div class="col-md-9 ms-sm-auto">
+            <!-- Pending Leaves content -->
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Pending Leave Applications</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Employee</th>
+                                                <th>Subject</th>
+                                                <th>Leave Type</th>
+                                                <th>From</th>
+                                                <th>To</th>
+                                                <th>Days</th>
+                                                <th>Reason</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% if (leaves && leaves.length > 0) { %>
+                                                <% leaves.forEach(function(leave) { %>
+                                                    <tr>
+                                                        <td><%= leave.employeeLeave.name %></td>
+                                                        <td><%= leave.subject %></td>
+                                                        <td><%= leave.leaveType %></td>
+                                                        <td><%= moment(leave.from).format('DD/MM/YYYY') %></td>
+                                                        <td><%= moment(leave.to).format('DD/MM/YYYY') %></td>
+                                                        <td><%= leave.days %></td>
+                                                        <td><%= leave.reason %></td>
+                                                        <td>
+                                                            <a href="/dh/leave/<%= leave._id %>" class="btn btn-sm btn-info">
+                                                                <i class="fas fa-eye"></i> View
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                <% }); %>
+                                            <% } else { %>
+                                                <tr>
+                                                    <td colspan="8" class="text-center">No pending leave applications</td>
+                                                </tr>
+                                            <% } %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-center mt-3">
+                                    <a href="/dh/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('./partials/footer') %> 

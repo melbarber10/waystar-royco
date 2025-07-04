@@ -1,0 +1,413 @@
+<%- include('../partial/header') %>
+
+<style>
+    .register-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2rem 0;
+    }
+    
+    .register-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    
+    .register-header {
+        background: linear-gradient(135deg, #6a7089 0%, #382138 100%);
+        color: white;
+        padding: 2rem;
+        text-align: center;
+        margin: -1.5rem -1.5rem 2rem -1.5rem;
+    }
+    
+    .register-header h2 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 2rem;
+    }
+    
+    .register-header p {
+        margin: 0.5rem 0 0 0;
+        opacity: 0.9;
+        font-size: 1rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    
+    .form-control {
+        border: 2px solid #e1e5e9;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background-color: #f8f9fa;
+    }
+    
+    .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        background-color: white;
+    }
+    
+    .form-control-file {
+        border: 2px dashed #e1e5e9;
+        border-radius: 10px;
+        padding: 1rem;
+        text-align: center;
+        background-color: #f8f9fa;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control-file:hover {
+        border-color: #667eea;
+        background-color: #f0f2ff;
+    }
+    
+    .btn-register {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        border-radius: 10px;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: white;
+        width: 100%;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+    
+    .btn-register:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        color: white;
+    }
+    
+    .alert {
+        border-radius: 10px;
+        border: none;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .alert-danger {
+        background-color: #ffe6e6;
+        color: #d63384;
+        border-left: 4px solid #d63384;
+    }
+    
+    .alert-success {
+        background-color: #e6ffe6;
+        color: #198754;
+        border-left: 4px solid #198754;
+    }
+    
+    .login-link {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e1e5e9;
+    }
+    
+    .login-link a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+    }
+    
+    .login-link a:hover {
+        color: #764ba2;
+        text-decoration: underline;
+    }
+    
+    .form-text {
+        font-size: 0.875rem;
+        color: #6c757d;
+        margin-top: 0.25rem;
+    }
+    
+    .text-warning {
+        color: #fd7e14 !important;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+    
+    .role-selector {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .role-option {
+        flex: 1;
+        text-align: center;
+        padding: 1rem;
+        border: 2px solid #e1e5e9;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background-color: #f8f9fa;
+    }
+    
+    .role-option:hover {
+        border-color: #667eea;
+        background-color: #f0f2ff;
+    }
+    
+    .role-option.active {
+        border-color: #667eea;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    .role-option i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    
+    @media (max-width: 768px) {
+        .register-container {
+            padding: 1rem;
+        }
+        
+        .register-header {
+            padding: 1.5rem;
+            margin: -1rem -1rem 1.5rem -1rem;
+        }
+        
+        .register-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .role-selector {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<div class="register-container">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="register-card">
+                    <div class="register-header">
+                        <h2><i class="bi bi-person-plus"></i> Create Account</h2>
+                        <p>Join Waystar Royco and start managing your leaves efficiently</p>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <form action="/auth/register" method="POST" enctype="multipart/form-data" id="registerForm">
+                            <!-- Role Selection -->
+                            <div class="form-group">
+                                <label class="form-label">Select Your Role</label>
+                                <div class="role-selector">
+                                    <div class="role-option" data-role="employee">
+                                        <i class="bi bi-person"></i>
+                                        <div>Employee</div>
+                                    </div>
+                                    <div class="role-option" data-role="dh">
+                                        <i class="bi bi-person-badge"></i>
+                                        <div>Department Head</div>
+                                    </div>
+                                    <div class="role-option" data-role="coo">
+                                        <i class="bi bi-person-circle"></i>
+                                        <div>COO</div>
+                                    </div>
+                                </div>
+                                <select class="form-control" id="role" name="role" required style="display: none;">
+                                    <option value="employee">Employee</option>
+                                    <option value="dh">Department Head</option>
+                                    <option value="coo">COO</option>
+                                </select>
+                            </div>
+
+                            <!-- Personal Information -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="name">
+                                            <i class="bi bi-person"></i> Full Name
+                                        </label>
+                                        <input type="text" class="form-control" id="name" name="name" required placeholder="Enter your full name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="email">
+                                            <i class="bi bi-envelope"></i> Email Address
+                                        </label>
+                                        <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Contact Information -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="phoneNumber">
+                                            <i class="bi bi-telephone"></i> Phone Number
+                                        </label>
+                                        <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group" id="department-group">
+                                        <label class="form-label" for="department">
+                                            <i class="bi bi-building"></i> Department
+                                        </label>
+                                        <select class="form-control" id="department" name="department" required>
+                                            <option value="">Select Department</option>
+                                            <option value="IT">IT</option>
+                                            <option value="HR">HR</option>
+                                            <option value="Finance">Finance</option>
+                                            <option value="Marketing">Marketing</option>
+                                            <option value="Operations">Operations</option>
+                                        </select>
+                                        <div id="department-warning" class="text-warning" style="display:none;">
+                                            <i class="bi bi-exclamation-triangle"></i> Please select a department.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Hidden input for COO department -->
+                            <input type="hidden" id="cooDepartment" name="department" value="Operations" disabled>
+
+                            <!-- Password Fields -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="password">
+                                            <i class="bi bi-lock"></i> Password
+                                        </label>
+                                        <input type="password" class="form-control" id="password" name="password" required placeholder="Create a password">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label" for="confirmPassword">
+                                            <i class="bi bi-lock-fill"></i> Confirm Password
+                                        </label>
+                                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Profile Image -->
+                            <div class="form-group">
+                                <label class="form-label" for="image">
+                                    <i class="bi bi-camera"></i> Profile Image (Optional)
+                                </label>
+                                <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
+                                <div class="form-text">
+                                    <i class="bi bi-info-circle"></i> Upload a profile image (JPG, PNG, GIF). Max size: 5MB
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-register">
+                                <i class="bi bi-person-plus"></i> Create Account
+                            </button>
+                        </form>
+
+                        <div class="login-link">
+                            <p>Already have an account? <a href="/auth/login">Sign in here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const roleOptions = document.querySelectorAll('.role-option');
+    const roleSelect = document.getElementById('role');
+    const departmentSelect = document.getElementById('department');
+    const cooDepartment = document.getElementById('cooDepartment');
+    const departmentGroup = document.getElementById('department-group');
+    const departmentWarning = document.getElementById('department-warning');
+    const form = document.getElementById('registerForm');
+
+    // Role selection with visual feedback
+    roleOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            // Remove active class from all options
+            roleOptions.forEach(opt => opt.classList.remove('active'));
+            // Add active class to clicked option
+            this.classList.add('active');
+            // Update hidden select
+            roleSelect.value = this.dataset.role;
+            updateDepartmentField();
+        });
+    });
+
+    function updateDepartmentField() {
+        if (roleSelect.value === 'coo') {
+            departmentSelect.value = 'Operations';
+            departmentSelect.disabled = true;
+            cooDepartment.disabled = false;
+            departmentGroup.style.display = 'none';
+        } else {
+            departmentSelect.disabled = false;
+            cooDepartment.disabled = true;
+            departmentGroup.style.display = '';
+        }
+    }
+
+    // Set initial active role
+    roleOptions[0].classList.add('active');
+
+    // Password confirmation validation
+    form.addEventListener('submit', function(e) {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        
+        if (password !== confirmPassword) {
+            e.preventDefault();
+            alert('Passwords do not match!');
+            return;
+        }
+        
+        // Department warning for non-coo
+        if (roleSelect.value !== 'coo' && !departmentSelect.value) {
+            e.preventDefault();
+            departmentWarning.style.display = 'block';
+            return;
+        } else {
+            departmentWarning.style.display = 'none';
+        }
+    });
+
+    // Real-time password matching
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    
+    function checkPasswordMatch() {
+        if (confirmPassword.value && password.value !== confirmPassword.value) {
+            confirmPassword.style.borderColor = '#d63384';
+        } else {
+            confirmPassword.style.borderColor = '#e1e5e9';
+        }
+    }
+    
+    password.addEventListener('input', checkPasswordMatch);
+    confirmPassword.addEventListener('input', checkPasswordMatch);
+});
+</script>
+
+<%- include('../partial/footer') %>
